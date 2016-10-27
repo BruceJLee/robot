@@ -20,4 +20,23 @@ describe TableTop do
 
   end
 
+  describe ".validate" do
+
+    context "when coordinate is in range of table top" do
+      it { expect(table_top.validate(4,4)).to eql(true) }
+    end
+
+    context "when coordinate is not in range of table top" do
+
+      context "when coordinate is over with positive value" do
+        it { expect(table_top.validate(6,5)).to eql(false) }
+      end
+
+      context "when coordinate is over with negative value" do
+        it { expect(table_top.validate(-1,0)).to eql(false) }
+      end
+
+    end
+
+  end
 end
