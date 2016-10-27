@@ -26,4 +26,34 @@ describe Coordinate do
     it { expect(coordinate.y).to eql(3) }
   end
 
+  describe ".move" do
+    before(:each) do
+      coordinate.x = 3
+      coordinate.y = 4
+    end
+
+    context "move to north" do
+      before { coordinate.move("NORTH") }
+      it { expect(coordinate.x).to eql(3) }
+      it { expect(coordinate.y).to eql(5) }
+    end
+
+    context "move to east" do
+      before { coordinate.move("EAST") }
+      it { expect(coordinate.x).to eql(4) }
+      it { expect(coordinate.y).to eql(4) }
+    end
+
+    context "move to south" do
+      before { coordinate.move("SOUTH") }
+      it { expect(coordinate.x).to eql(3) }
+      it { expect(coordinate.y).to eql(3) }
+    end
+
+    context "move to west" do
+      before { coordinate.move("WEST") }
+      it { expect(coordinate.x).to eql(2) }
+      it { expect(coordinate.y).to eql(4) }
+    end
+  end
 end
