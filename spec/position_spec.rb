@@ -49,4 +49,23 @@ describe Position do
       it { expect(position.value).to eql([0, 2, "WEST"])}
     end
   end
+
+  describe ".turn" do
+
+    context "turn right" do
+      before do
+        position.place(valid_coordinate, facing)
+        position.turn("LEFT")
+      end
+      it { expect(position.value).to eql([3, 4, "WEST"]) }
+    end
+
+    context "turn left" do
+      before do
+        position.place(valid_coordinate, facing)
+        position.turn("RIGHT")
+      end
+      it { expect(position.value).to eql([3, 4, "EAST"]) }
+    end
+  end
 end

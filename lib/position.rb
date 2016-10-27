@@ -18,6 +18,7 @@ class Position
   end
 
   def move
+    return if @value.nil?
     @coordinate.move(@facing.point)
 
     if !@table_top.validate(@coordinate.x, @coordinate.y)
@@ -28,4 +29,13 @@ class Position
     @value = [@coordinate.x, @coordinate.y, @facing.point]
   end
 
+  def turn(direction)
+    return if @value.nil?
+    if direction == "LEFT"
+      @facing.turn_left
+    else
+      @facing.turn_right
+    end
+    @value = [@coordinate.x, @coordinate.y, @facing.point]
+  end
 end
