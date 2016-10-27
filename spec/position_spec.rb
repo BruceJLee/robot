@@ -32,4 +32,21 @@ describe Position do
 
   end
 
+  describe ".move" do
+    context "move to valid position and update position value" do
+      before do
+        position.place(valid_coordinate, facing)
+        position.move
+      end
+      it {expect(position.value).to eql([3, 5, "NORTH"])}
+    end
+
+    context "ignore to update position value due to falling" do
+      before do
+        position.place(falling_coordinate, falling_facing)
+        position.move
+      end
+      it { expect(position.value).to eql([0, 2, "WEST"])}
+    end
+  end
 end

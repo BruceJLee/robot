@@ -17,4 +17,15 @@ class Position
     end
   end
 
+  def move
+    @coordinate.move(@facing.point)
+
+    if !@table_top.validate(@coordinate.x, @coordinate.y)
+      @coordinate.x = @value[0]
+      @coordinate.y = @value[1]
+    end
+
+    @value = [@coordinate.x, @coordinate.y, @facing.point]
+  end
+
 end
