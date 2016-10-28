@@ -3,7 +3,7 @@ class Facing
   CARDINAL_POINTS = ["NORTH","EAST","SOUTH","WEST"]
   attr_accessor :point
 
-  def initialize(point)
+  def initialize(point=nil)
     @point = point
   end
 

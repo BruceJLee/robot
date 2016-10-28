@@ -2,13 +2,8 @@ require 'position'
 
 describe Position do
 
-  let(:position) { Position.new(table_top) }
-  let(:valid_coordinate) { Coordinate.new(3, 4) }
-  let(:invalid_coordinate) { Coordinate.new(6, 5) }
-  let(:falling_coordinate) { Coordinate.new(0, 2) }
-  let(:facing) { Facing.new("NORTH") }
-  let(:falling_facing) { Facing.new("WEST") }
   let(:table_top) { TableTop.new(5, 5) }
+  let(:position) { Position.new(table_top) }
 
   describe ".place" do
     
@@ -17,17 +12,13 @@ describe Position do
     end
 
     context "after placing valid position" do
-      before { position.place(valid_coordinate, facing) }
+      before { position.place(3, 4, "NORTH") }
       it { expect(position.value).to eql([3, 4, "NORTH"]) }
-      it { expect(position.coordinate).to eql(valid_coordinate) }
-      it { expect(position.facing).to eql(facing) }
     end
 
     context "after placing invalid position" do
-      before { position.place(invalid_coordinate, facing) }
+      before { position.place(6, 5, "NORTH") }
       it { expect(position.value).to eql(nil) }
-      it { expect(position.coordinate).to eql(nil) }
-      it { expect(position.facing).to eql(nil) }
     end
 
   end
@@ -35,18 +26,18 @@ describe Position do
   describe ".move" do
     context "move to valid position and update position value" do
       before do
-        position.place(valid_coordinate, facing)
+        position.place(3, 4, "NORTH")
         position.move
       end
-      it {expect(position.value).to eql([3, 5, "NORTH"])}
+      it {expect(position.value).to eql([3, 5, "NORTH"]) }
     end
 
     context "ignore to update position value due to falling" do
       before do
-        position.place(falling_coordinate, falling_facing)
+        position.place(0, 2, "WEST")
         position.move
       end
-      it { expect(position.value).to eql([0, 2, "WEST"])}
+      it { expect(position.value).to eql([0, 2, "WEST"]) }
     end
   end
 
@@ -54,7 +45,7 @@ describe Position do
 
     context "turn right" do
       before do
-        position.place(valid_coordinate, facing)
+        position.place(3, 4, "NORTH")
         position.turn("LEFT")
       end
       it { expect(position.value).to eql([3, 4, "WEST"]) }
@@ -62,7 +53,7 @@ describe Position do
 
     context "turn left" do
       before do
-        position.place(valid_coordinate, facing)
+        position.place(3, 4, "NORTH")
         position.turn("RIGHT")
       end
       it { expect(position.value).to eql([3, 4, "EAST"]) }

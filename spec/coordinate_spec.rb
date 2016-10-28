@@ -2,35 +2,35 @@ require 'coordinate'
 
 describe Coordinate do
 
-  let(:coordinate) { Coordinate.new(3, 4) }
+  let(:table_top) { TableTop.new(5, 5)}
+  let(:coordinate) { Coordinate.new(table_top) }
 
-  describe ".x" do
-    it "should return x coordinate" do
-      expect(coordinate.x).to eql(3)
+  describe ".update" do
+    context "update valid coordinate" do
+      before { coordinate.update(3, 4) }
+      it { expect(coordinate.x).to eql(3) }
+      it { expect(coordinate.y).to eql(4) }
     end
-  end
-
-  describe ".y" do
-    it "should return y coordinate" do
-      expect(coordinate.y).to eql(4)
+    context "update invalid coordinate" do
+      before { coordinate.update(5, 6) }
+      it { expect(coordinate.x).to eql(nil) }
+      it { expect(coordinate.y).to eql(nil) }
     end
-  end
-
-  describe ".x=" do
-    before { coordinate.x = 2}
-    it { expect(coordinate.x).to eql(2) }
-  end
-
-  describe ".y=" do
-    before { coordinate.y = 3}
-    it { expect(coordinate.y).to eql(3) }
   end
 
   describe ".move" do
-    before(:each) do
-      coordinate.x = 3
-      coordinate.y = 4
+
+    context "move with invalid coordinate" do
+      before { coordinate.update(5, 6) }
+      it { expect(coordinate.move("SOUTH")).to eql(:ignore) }
     end
+
+    context "move with valid coordinate" do
+      before { coordinate.update(3, 4) }
+      it { expect(coordinate.move("NORTH")).to eql(:success) }
+    end
+
+    before(:each) { coordinate.update(3, 4) }
 
     context "move to north" do
       before { coordinate.move("NORTH") }
@@ -54,6 +54,18 @@ describe Coordinate do
       before { coordinate.move("WEST") }
       it { expect(coordinate.x).to eql(2) }
       it { expect(coordinate.y).to eql(4) }
+    end
+  end
+
+  describe ".valid" do
+    context "x and y coordinate are valid" do
+      before { coordinate.update(3, 4) }
+      it { expect(coordinate.valid).to eql(true)}
+    end
+
+    context "x and y coordinate are not valid" do
+      before { coordinate.update(5, 6) }
+      it { expect(coordinate.valid).to eql(false) }
     end
   end
 end

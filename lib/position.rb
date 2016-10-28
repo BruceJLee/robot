@@ -1,36 +1,33 @@
 class Position
   attr :value, :coordinate, :facing
+  attr_accessor :table_top
 
   def initialize(table_top)
     @table_top = table_top
+    @coordinate = Coordinate.new(@table_top)
+    @facing = Facing.new()
+    @value = nil
   end
 
-  def place(coordinate, facing)
-    if @table_top.validate(coordinate.x, coordinate.y)
-      @coordinate = coordinate
-      @facing = facing
-      @value = [coordinate.x, coordinate.y, facing.point]
+  def place(x, y, facing_point)
+    @coordinate.update(x, y)
+    @facing.point = facing_point
+
+    if @coordinate.valid
+      @value = [@coordinate.x, @coordinate.y, @facing.point]
     else
-      @coordinate = nil
-      @facing = nil
       @value = nil
     end
   end
 
   def move
-    return if @value.nil?
-    @coordinate.move(@facing.point)
-
-    if !@table_top.validate(@coordinate.x, @coordinate.y)
-      @coordinate.x = @value[0]
-      @coordinate.y = @value[1]
+    if @coordinate.move(@facing.point) == :success
+      @value = [@coordinate.x, @coordinate.y, @facing.point]
     end
-
-    @value = [@coordinate.x, @coordinate.y, @facing.point]
   end
 
   def turn(direction)
-    return if @value.nil?
+    return unless @coordinate.valid
     if direction == "LEFT"
       @facing.turn_left
     else
