@@ -4,18 +4,18 @@ describe TableTop do
   
   let(:table_top) { TableTop.new(5, 5) }
   
-  describe ".width" do
+  describe ".end_of_x" do
     
-    it "should return width of table top" do
-      expect(table_top.width).to eql(5)
+    it "should return end_of_x of table top" do
+      expect(table_top.end_of_x).to eql(4)
     end
 
   end
 
-  describe ".height" do
+  describe ".end_of_y" do
     
-    it "should return height of table top" do
-      expect(table_top.height).to eql(5)
+    it "should return end_of_y of table top" do
+      expect(table_top.end_of_y).to eql(4)
     end
 
   end
@@ -29,7 +29,7 @@ describe TableTop do
     context "when coordinate is not in range of table top" do
 
       context "when coordinate is over with positive value" do
-        it { expect(table_top.validate(6,5)).to eql(false) }
+        it { expect(table_top.validate(5,4)).to eql(false) }
       end
 
       context "when coordinate is over with negative value" do

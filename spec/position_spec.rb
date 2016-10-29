@@ -27,12 +27,12 @@ describe Position do
 
     context "move to valid position and update position value" do
       before do
-        position.place(3, 4, "NORTH")
+        position.place(3, 3, "NORTH")
         @result = position.move
       end
 
       it { expect(@result).to eql(:success) }
-      it {expect(position.value).to eql([3, 5, "NORTH"]) }
+      it {expect(position.value).to eql([3, 4, "NORTH"]) }
     end
 
     context "ignore to update position value due to falling" do

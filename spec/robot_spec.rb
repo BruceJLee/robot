@@ -5,7 +5,7 @@ describe Robot do
   let(:table_top) { TableTop.new(5, 5) }
   let(:robot) { Robot.new(table_top) }
   let(:normal_command) {%{
-    PLACE, 3, 4, NORTH
+    PLACE, 3, 3, NORTH
     MOVE
     LEFT
     MOVE
@@ -38,7 +38,7 @@ describe Robot do
     MOVE
     RIGHT
     MOVE
-    PLACE, 4, 3, NORTH
+    PLACE, 3, 3, NORTH
     MOVE
     RIGHT
     MOVE
@@ -47,7 +47,7 @@ describe Robot do
 
   describe ".execute_commands" do
     context "execute normal command" do
-      it { expect { robot.execute_commands(normal_command) }.to output("2, 4, SOUTH\n").to_stdout }
+      it { expect { robot.execute_commands(normal_command) }.to output("2, 3, SOUTH\n").to_stdout }
     end
 
     context "execute command with wrong placing" do
@@ -59,7 +59,7 @@ describe Robot do
     end
 
     context "execute command with wrong placing and correct placing" do
-      it { expect { robot.execute_commands(wrong_placing_and_correct_placing) }.to output("5, 4, EAST\n").to_stdout }
+      it { expect { robot.execute_commands(wrong_placing_and_correct_placing) }.to output("4, 4, EAST\n").to_stdout }
     end
   end
 
