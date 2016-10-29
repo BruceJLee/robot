@@ -24,21 +24,27 @@ describe Position do
   end
 
   describe ".move" do
+
     context "move to valid position and update position value" do
       before do
         position.place(3, 4, "NORTH")
-        position.move
+        @result = position.move
       end
+
+      it { expect(@result).to eql(:success) }
       it {expect(position.value).to eql([3, 5, "NORTH"]) }
     end
 
     context "ignore to update position value due to falling" do
       before do
         position.place(0, 2, "WEST")
-        position.move
+        @result = position.move
       end
+
+      it { expect(@result).to eql(:ignore) }
       it { expect(position.value).to eql([0, 2, "WEST"]) }
     end
+
   end
 
   describe ".turn" do
@@ -48,15 +54,18 @@ describe Position do
         position.place(3, 4, "NORTH")
         position.turn("LEFT")
       end
+
       it { expect(position.value).to eql([3, 4, "WEST"]) }
     end
 
     context "turn right" do
       before do
         position.place(3, 4, "NORTH")
-        position.turn("RIGHT")
+        @result = position.turn("RIGHT")
       end
+
       it { expect(position.value).to eql([3, 4, "EAST"]) }
     end
+
   end
 end

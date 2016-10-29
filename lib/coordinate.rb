@@ -6,21 +6,17 @@ class Coordinate
 
   def initialize(table_top)
     @table_top = table_top
-    @valid = false
+  end
+
+  def validate(x, y)
+    @table_top.validate(x, y)
   end
 
   def update(x, y)
-    if table_top.validate(x, y)
-      @x, @y = x, y
-      @valid = true
-    else
-      @x, @y = nil, nil
-      @valid = false
-    end
+    @x, @y = x, y
   end
 
   def move(facing_point)
-    return :ignore unless @valid
 
     new_x = @x + MOVE_X[facing_point].to_i
     new_y = @y + MOVE_Y[facing_point].to_i
