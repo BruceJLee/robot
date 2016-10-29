@@ -43,7 +43,7 @@ describe Position do
 
   describe ".turn" do
 
-    context "turn right" do
+    context "turn left" do
       before do
         position.place(3, 4, "NORTH")
         position.turn("LEFT")
@@ -51,7 +51,7 @@ describe Position do
       it { expect(position.value).to eql([3, 4, "WEST"]) }
     end
 
-    context "turn left" do
+    context "turn right" do
       before do
         position.place(3, 4, "NORTH")
         position.turn("RIGHT")
