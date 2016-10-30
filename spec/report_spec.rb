@@ -14,14 +14,14 @@ describe Report do
 
   end
 
-  describe ".find_latest_position_value" do
+  describe ".print_latest_position_value" do
     before do
       report.record_event(event1)
       report.record_event(event2)
     end
     
-    it "should return a position value from with latest event" do
-      expect(report.find_latest_position_value).to eql([3, 5, "NORTH"])
+    it "should print a position value from with latest event" do
+      expect { report.print_latest_position_value }.to output("3, 5, NORTH\n").to_stdout
     end
   end
 end

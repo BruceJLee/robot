@@ -9,8 +9,10 @@ class Report
     @events << event
   end
 
-  def find_latest_position_value
-    @events.select { |event| event.type == "position" }.last.data
+  def print_latest_position_value
+    position_value = @events.select { |event| event.type == "position" }.last.data
+    print "#{position_value.join(", ")}\n"
+    return :success
   end
 
 end

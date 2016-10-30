@@ -46,9 +46,7 @@ class Robot
   end
 
   def action_report
-    position_value = @report.find_latest_position_value
-    print(position_value.join(", ") + "\n")
-    return :success
+    @report.print_latest_position_value
   end
 
   def skip_command?(event)
