@@ -16,12 +16,12 @@ class Robot
         if command.event == "place"
           result = place(command.args)
         else
-          next if @position.value.nil?
+          next unless @position.is_available?
           result = self.send(command.event)
         end
         record_position_event(command.event, result)
       elsif command.type == "action"
-        next if @position.value.nil?
+        next unless @position.is_available?
         result = self.send(command.event)
         record_action_event(command.event, result)
       end
@@ -31,7 +31,7 @@ class Robot
   private
 
   def record_position_event(event, result)
-    @report.record_event(Event.new("position", event, result, @position.value))
+    @report.record_event(Event.new("position", event, result, @position.get_value))
   end
 
   def record_action_event(event, result)
@@ -40,7 +40,6 @@ class Robot
 
   def place(args)
     @position.place(args[0].to_i, args[1].to_i, args[2])
-    return @position.value.nil? ? :fail : :success
   end
 
   def move
@@ -49,12 +48,10 @@ class Robot
 
   def left
     @position.turn("LEFT")
-    return :success
   end
 
   def right
     @position.turn("RIGHT")
-    return :success
   end
 
   def report
