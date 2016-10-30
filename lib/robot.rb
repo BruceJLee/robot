@@ -11,20 +11,11 @@ class Robot
   end
 
   def execute_commands(commands)
-    CommandParser.parser(commands).each do |command|    
-      if command.type == "position"
-        if command.event == "place"
-          result = place(command.args)
-        else
-          next unless @position.is_available?
-          result = self.send(command.event)
-        end
-        record_position_event(command.event, result)
-      elsif command.type == "action"
-        next unless @position.is_available?
-        result = self.send(command.event)
-        record_action_event(command.event, result)
-      end
+    CommandParser.parser(commands).each do |command|
+      next if skip_command?(command.event)
+      method = self.method("#{command.type}_#{command.event}")
+      result = command.args.nil? ? method.call : method.call(command.args)
+      self.send("record_#{command.type}_event", command.event, result)
     end
   end
 
@@ -38,25 +29,29 @@ class Robot
     @report.record_event(Event.new("action", event, result, nil))
   end
 
-  def place(args)
+  def position_place(args)
     @position.place(args[0].to_i, args[1].to_i, args[2])
   end
 
-  def move
+  def position_move
     @position.move
   end
 
-  def left
+  def position_left
     @position.turn("LEFT")
   end
 
-  def right
+  def position_right
     @position.turn("RIGHT")
   end
 
-  def report
+  def action_report
     position_value = @report.find_latest_position_value
     print(position_value.join(", ") + "\n")
     return :success
+  end
+
+  def skip_command?(event)
+    event != "place" && !@position.is_available?
   end
 end

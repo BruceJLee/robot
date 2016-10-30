@@ -1,4 +1,5 @@
 require 'robot'
+require 'table_top'
 
 describe Robot do
   
