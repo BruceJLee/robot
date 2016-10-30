@@ -1,3 +1,5 @@
+require 'command'
+
 class CommandParser
   COMMAND_SEPERATOR = "\n"
   ARGUMENT_SEPERATOR = ","

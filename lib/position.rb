@@ -1,3 +1,6 @@
+require 'coordinate'
+require 'facing'
+
 class Position
   attr :value, :coordinate, :facing
   attr_accessor :table_top

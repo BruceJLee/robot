@@ -1,3 +1,8 @@
+require 'position'
+require 'report'
+require 'event'
+require 'command_parser'
+
 class Robot
 
   def initialize(table_top)
