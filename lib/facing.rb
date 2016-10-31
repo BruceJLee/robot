@@ -9,7 +9,6 @@ class Facing
 
   def turn_left
     @point = CARDINAL_POINTS[CARDINAL_POINTS.index(@point)-1]
-    return :success
   end
 
   def turn_right
@@ -18,6 +17,5 @@ class Facing
     else
       @point = CARDINAL_POINTS[CARDINAL_POINTS.index(@point)+1]
     end
-    return :success
   end
 end

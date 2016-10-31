@@ -6,6 +6,7 @@ task "run" do
   $LOAD_PATH.unshift(File.dirname(__FILE__), "lib")
   require 'robot'
   require 'table_top'
+  require 'simulator'
 
   command_file = ARGV[1] || "example_commands/commands.txt"
   commands = File.read(command_file)
@@ -14,5 +15,6 @@ task "run" do
   print "OUTPUT:\n"
   table_top = TableTop.new(5, 5)
   robot = Robot.new(table_top)
-  robot.execute_commands(commands)
+  simulator = Simulator.new(robot)
+  simulator.execute_commands(commands)
 end

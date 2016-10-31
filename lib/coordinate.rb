@@ -17,15 +17,11 @@ class Coordinate
   end
 
   def move(facing_point)
-
     new_x = @x + MOVE_X[facing_point].to_i
     new_y = @y + MOVE_Y[facing_point].to_i
 
     if table_top.validate(new_x, new_y)
       @x, @y = new_x, new_y
-      return :success
-    else
-      return :ignore
     end
   end
 

@@ -16,13 +16,21 @@ describe Coordinate do
   describe ".move" do
 
     context "move with invalid coordinate" do
-      before { coordinate.update(3, 0) }
-      it { expect(coordinate.move("SOUTH")).to eql(:ignore) }
+      before do
+        coordinate.update(3, 0)
+        coordinate.move("SOUTH")
+      end
+      it { expect(coordinate.x).to eql(3) }
+      it { expect(coordinate.y).to eql(0) }
     end
 
     context "move with valid coordinate" do
-      before { coordinate.update(3, 3) }
-      it { expect(coordinate.move("NORTH")).to eql(:success) }
+      before do
+        coordinate.update(3, 3)
+        coordinate.move("NORTH")
+      end
+      it { expect(coordinate.x).to eql(3) }
+      it { expect(coordinate.y).to eql(4) }
     end
 
     before(:each) { coordinate.update(3, 3) }

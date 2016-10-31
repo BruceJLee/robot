@@ -17,10 +17,8 @@ class Position
       @coordinate.update(x, y)
       @facing.point = facing_point
       @available = true
-      return :success
     else
       @available = false
-      return :fail
     end
   end
 
@@ -29,13 +27,11 @@ class Position
   end
 
   def turn(direction)
-
     if direction == "LEFT"
       @facing.turn_left
     else
       @facing.turn_right
     end
-
   end
 
   def get_value
