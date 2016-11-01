@@ -8,7 +8,7 @@ class TableTop
   end
 
   def validate(x, y)
-    (x >= ORIGIN[:x] && x <= @end_of_x) &&
-    (y >= ORIGIN[:y] && y <= @end_of_y)
+    x.between?(ORIGIN[:x], @end_of_x) &&
+    y.between?(ORIGIN[:y], @end_of_y)
   end
 end
