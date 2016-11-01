@@ -17,12 +17,19 @@ class Coordinate
   end
 
   def move(facing_point)
-    new_x = @x + MOVE_X[facing_point].to_i
-    new_y = @y + MOVE_Y[facing_point].to_i
+    new_x, new_y = get_front(facing_point.upcase)
 
     if table_top.validate(new_x, new_y)
       @x, @y = new_x, new_y
     end
+  end
+
+  private
+
+  def get_front(facing_point)
+    x = @x + MOVE_X[facing_point].to_i
+    y = @y + MOVE_Y[facing_point].to_i
+    return x, y
   end
 
 end
