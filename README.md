@@ -11,7 +11,7 @@
 ### Rake Version: 11.3.0
 
 ### VCS: Git
-
+<p align="center"><img width=95% src="https://s3-ap-southeast-2.amazonaws.com/jameslee-assets/demo.gif"></p>
 ## GEMS
 Rspec: testing
 Rake: command run
